@@ -56,14 +56,15 @@ def getCriticalJobStatus():
 
     client = shiftUpdate.getConnection(param)
 
-    # exclusion = {
-    #     "PMDPEN" : "PMDPEN*",
-    #     "PPSPNF" : "PPSPNF*",
-    #     "PCMPCD" : "PCMPCD*",
-    #     "PPOPEP" : "PPOPEP*"
-    # }
+    exclusion = {
+        "PMDPEN" : "PMDPEN*",
+        "PPSPNF" : "PPSPNF*",
+        "PCMPCD" : "PCMPCD*",
+        "PPOPEP" : "PPOPEP*",
+        "PPOPSP" : "PPOPSP*"
+    }
     startJobs = {
-       "PPOPSP" : "PPOPSP02", "PMDPN9" : "PMDPN903*", "PCMPMA": "PCMPMA03",
+        "PMDPN9" : "PMDPN903*", "PCMPMA": "PCMPMA03",
         "PCMPDS" : "PCMPDS03","PPSPH7": "PPSPH703", "PCMPML" : "PCMPML03",
         "PRCPSC" : "PRCPSC03", "PPSPLU" : "PPSPLU03", "PPSPHA" : "PPSPHA03",
         "PPOPSW" : "PPOPSW03","PPSPNX" : "PPSPNX03", "PPSPIN" : "PPSPIN06",
@@ -71,9 +72,9 @@ def getCriticalJobStatus():
         "PMIPDT" : "PMIPDT03", "PPRPAL" : "PPRPAL02", "PPCPCL" : "PPCPCL03",
         "PMDPNT" : "PMDPNT03", "PMDPCL" : "PMDPCL03", "PCMPIV" : "PCMPIV02",
         "PMDPN8" : "PMDPN803", "PPTPAZ" : "PPTPAZ02", "PPSPHC" : "PPSPHC03",
-        "PCMPH1" : "PCMPH103", "PCOPE8" : "PCOPE803", "PPSPGP" : "PPSPGP02"
-        # "PMDPEN" : "PMDPEN*", "PPSPNF" : "PPSPNF*", "PCMPCD" : "PCMPCD*",
-        # "PPOPEP" : "PPOPEP*"
+        "PCMPH1" : "PCMPH103", "PCOPE8" : "PCOPE803", "PPSPGP" : "PPSPGP02",
+        "PMDPEN" : "PMDPEN", "PPSPNF" : "PPSPNF", "PCMPCD" : "PCMPCD",
+        "PPOPEP" : "PPOPEP", "PPOPSP" : "PPOPSP"
     }
 
     partialCmd = "cd /opt/unikix/prd_failover/pulse/history; "
@@ -82,7 +83,7 @@ def getCriticalJobStatus():
     past = datetime.datetime.now() - datetime.timedelta(hours=2, minutes=00)
     past = past.strftime('%H:%M')
 
-    print(datetime.datetime.now().strftime('%H:%M'), past)
+    # print(datetime.datetime.now().strftime('%H:%M'), past)
     lateThreshold = ''
     earlyThreshold = ''
     startTime = ''
@@ -124,18 +125,20 @@ def getCriticalJobStatus():
                         print("--error--")
                         print(str(e))
                         print(str(stderr))
-            else:
-                if scheduleTime <= datetime.datetime.now().strftime('%H:%M') and  scheduleTime >= past:
-                    print(row)
-
 
             if secondaryEnd.endswith(" OK") and end.endswith("--Verify"):
-                print(start+secondaryEnd)
+                if currentJob in exclusion.keys():
+                    print(start+secondaryEnd+" Crosscheck")
+                else:
+                    print(start+secondaryEnd)
                 end = ''
                 secondaryEnd = ''
                 found = False
             elif end!='':
-                print(start+end)
+                if currentJob in exclusion.keys():
+                    print(start+end+" Crosscheck")
+                else:
+                    print(start+end)
                 end = ''
                 found = False
 

@@ -32,10 +32,12 @@ def installDeps():
     subprocess.call(commands["proxy"], shell=True)
     try:
         import paramiko
+        print("Paramiko : Already installed")
     except ImportError:
         subprocess.call(commands["paramiko"], shell=True)
     try:
         import getpass
+        print("getpass : Already installed")
     except ImportError:
         subprocess.call(commands["getpass"], shell=True)
 

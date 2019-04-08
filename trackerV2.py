@@ -64,17 +64,17 @@ def getCriticalJobStatus():
         "PPOPSP" : "PPOPSP*"
     }
     startJobs = {
-        "PMDPN9" : "PMDPN903*", "PCMPMA": "PCMPMA03",
-        "PCMPDS" : "PCMPDS03","PPSPH7": "PPSPH703", "PCMPML" : "PCMPML03",
-        "PRCPSC" : "PRCPSC03", "PPSPLU" : "PPSPLU03", "PPSPHA" : "PPSPHA03",
-        "PPOPSW" : "PPOPSW03","PPSPNX" : "PPSPNX03", "PPSPIN" : "PPSPIN06",
-        "PMDPAZ" : "PMDPAZ02", "PPSPSP" : "PPSPSP06", "PCMPMB" : "PCMPMB03",
-        "PMIPDT" : "PMIPDT03", "PPRPAL" : "PPRPAL02", "PPCPCL" : "PPCPCL03",
-        "PMDPNT" : "PMDPNT03", "PMDPCL" : "PMDPCL03", "PCMPIV" : "PCMPIV02",
-        "PMDPN8" : "PMDPN803", "PPTPAZ" : "PPTPAZ02", "PPSPHC" : "PPSPHC03",
-        "PCMPH1" : "PCMPH103", "PCOPE8" : "PCOPE803", "PPSPGP" : "PPSPGP02",
-        "PMDPEN" : "PMDPEN", "PPSPNF" : "PPSPNF", "PCMPCD" : "PCMPCD",
-        "PPOPEP" : "PPOPEP", "PPOPSP" : "PPOPSP"
+        "PMDPN9" : "PMDPN903*", "PCMPMA": "PCMPMA03","PCMPDS" : "PCMPDS03",
+        "PPSPH7": "PPSPH703", "PCMPML" : "PCMPML03", "PRCPSC" : "PRCPSC03",
+        "PPSPLU" : "PPSPLU03", "PPSPHA" : "PPSPHA03", "PPOPSW" : "PPOPSW03",
+        "PPSPNX" : "PPSPNX03", "PPSPIN" : "PPSPIN06", "PMDPAZ" : "PMDPAZ02",
+        "PPSPSP" : "PPSPSP06", "PCMPMB" : "PCMPMB03", "PMIPDT" : "PMIPDT03",
+        "PPRPAL" : "PPRPAL02", "PPCPCL" : "PPCPCL03", "PMDPNT" : "PMDPNT03",
+        "PMDPCL" : "PMDPCL03", "PCMPIV" : "PCMPIV02", "PMDPN8" : "PMDPN803",
+        "PPTPAZ" : "PPTPAZ02", "PPSPHC" : "PPSPHC03", "PCMPH1" : "PCMPH103",
+        "PCOPE8" : "PCOPE803", "PPSPGP" : "PPSPGP02", "PMDPEN" : "PMDPEN",
+        "PPSPNF" : "PPSPNF", "PCMPCD" : "PCMPCD", "PPOPEP" : "PPOPEP",
+        "PPOPSP" : "PPOPSP"
     }
 
     partialCmd = "cd /opt/unikix/prd_failover/pulse/history; "

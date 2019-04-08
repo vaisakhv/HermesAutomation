@@ -5,10 +5,9 @@ __author__ = 'U51855'
 import csv, os, gc, datetime
 import shiftUpdate
 
-def findStatus(line ,found, scheduleTime):
-    x = line
+def findStatus(startTime ,found, scheduleTime):
+    # x = line
     end =''
-    startTime = str(x).split(".")[-1].replace("\n","")
     startTime = datetime.datetime.strptime(startTime, "%H:%M")
     minusEarly = datetime.datetime.strptime(scheduleTime, "%H:%M") -\
                     datetime.timedelta(minutes=15)
@@ -72,9 +71,9 @@ def getCriticalJobStatus():
         "PMIPDT" : "PMIPDT03", "PPRPAL" : "PPRPAL02", "PPCPCL" : "PPCPCL03",
         "PMDPNT" : "PMDPNT03", "PMDPCL" : "PMDPCL03", "PCMPIV" : "PCMPIV02",
         "PMDPN8" : "PMDPN803", "PPTPAZ" : "PPTPAZ02", "PPSPHC" : "PPSPHC03",
-        "PCMPH1" : "PCMPH103", "PCOPE8" : "PCOPE803", "PPSPGP" : "PPSPGP02",
-        "PMDPEN" : "PMDPEN*", "PPSPNF" : "PPSPNF*", "PCMPCD" : "PCMPCD*",
-        "PPOPEP" : "PPOPEP*"
+        "PCMPH1" : "PCMPH103", "PCOPE8" : "PCOPE803", "PPSPGP" : "PPSPGP02"
+        # "PMDPEN" : "PMDPEN*", "PPSPNF" : "PPSPNF*", "PCMPCD" : "PCMPCD*",
+        # "PPOPEP" : "PPOPEP*"
     }
 
     partialCmd = "cd /opt/unikix/prd_failover/pulse/history; "
@@ -83,6 +82,7 @@ def getCriticalJobStatus():
     past = datetime.datetime.now() - datetime.timedelta(hours=2, minutes=00)
     past = past.strftime('%H:%M')
 
+    print(datetime.datetime.now().strftime('%H:%M'), past)
     lateThreshold = ''
     earlyThreshold = ''
     startTime = ''
@@ -109,10 +109,11 @@ def getCriticalJobStatus():
                         aixOut = stdout.readlines()
                         for x in aixOut:
                             date = str(x).split(".")[-2]
+                            startTime = str(x).split(".")[-1].replace("\n","")
                             if date == today and found != True:
                                 if end.endswith(" OK"):
                                     secondaryEnd = end
-                                end, found = findStatus(x,found, scheduleTime)
+                                end, found = findStatus(startTime,found, scheduleTime)
                                 # end = out[-1]
                                 # found = out[0]
                                 gc.collect()
@@ -123,6 +124,10 @@ def getCriticalJobStatus():
                         print("--error--")
                         print(str(e))
                         print(str(stderr))
+            else:
+                if scheduleTime <= datetime.datetime.now().strftime('%H:%M') and  scheduleTime >= past:
+                    print(row)
+
 
             if secondaryEnd.endswith(" OK") and end.endswith("--Verify"):
                 print(start+secondaryEnd)

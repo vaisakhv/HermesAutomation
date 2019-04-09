@@ -74,7 +74,7 @@ def getCriticalJobStatus():
         "PPTPAZ" : "PPTPAZ02", "PPSPHC" : "PPSPHC03", "PCMPH1" : "PCMPH103",
         "PCOPE8" : "PCOPE803", "PPSPGP" : "PPSPGP02", "PMDPEN" : "PMDPEN",
         "PPSPNF" : "PPSPNF", "PCMPCD" : "PCMPCD", "PPOPEP" : "PPOPEP",
-        "PPOPSP" : "PPOPSP"
+        "PPOPSP" : "PPOPSP", "PCMPST" : "PCMPST03"
     }
 
     partialCmd = "cd /opt/unikix/prd_failover/pulse/history; "

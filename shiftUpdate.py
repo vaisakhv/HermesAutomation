@@ -33,6 +33,7 @@ cmd /k <python_path> <path_to_dir>\shiftUpdate.py
 import paramiko
 import getpass
 import sys, os, gc, webbrowser
+import datetime
 
 def getConnection(param):
     '''
@@ -79,9 +80,10 @@ def getAixInfo(client, cmd, jobDispName):
     try:
         job = stdout.readlines()
         for x in job:
+            date = str(x).split(".")[-2]
             startTime = str(x).split(".")[-1]
         #cmd = str(cmd).replace("\n",'')
-        return "Last successful run started at "+jobDispName+"    "+startTime.replace("\n",'')
+        return ["Last successful run started at "+jobDispName+"    "+startTime.replace("\n",''), date]
     except:
         print(stderr)
 
@@ -119,10 +121,16 @@ def main():
                     "PPSPNX03" : "PPSPNXE_NEXTTRNK",
                     "PPSPNF" : "PPSPNFE_NEXTSCAN"
                 }
+    today = datetime.datetime.today().strftime('%Y-%m-%d')
     for c in cmds:
         if str(c).startswith("ls -lrt "):
-            out = str(getAixInfo(client, c, jobLongNames[c[8:-1]])).replace("\n",'')
-            print(out)
+            out = getAixInfo(client, c, jobLongNames[c[8:-1]])
+            date = out[-1]
+            line = out[0]
+            if date == today:
+                print(line)
+            else:
+                print(line.replace("\n",'')+" ("+date+")")
             gc.collect()
         else:
             print(c)

@@ -42,7 +42,6 @@ def test():
     nestedName = [n for n in out.keys()]
     #status = np.array(nested)
     df = pd.DataFrame({"Job Name":nestedName,"Job Status":nestedVal})
-    df = df.T
     #df.style.applymap(color, subset=['Job Status']).render()
     #df.style.set_properties(**{'font-size': '9pt', 'font-family': 'Calibri'}).render()
     #html = df.to_html(index=False)

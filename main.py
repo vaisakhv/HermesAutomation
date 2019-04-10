@@ -2,8 +2,6 @@ __author__name__ = "Vaisakh Viswanathan"
 __author__ = 'U51855'
 
 
-import  shiftUpdate
-import trackerV2
 from path import Path
 
 import os, sys, subprocess

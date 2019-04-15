@@ -100,7 +100,7 @@ def main():
             "\nDepot & Hub Jobs","ls -lrt PPSPAD03*", "ls -lrt PPSPAH03*",
             "\nPre Advice Load Check","ls -lrt PMDPCL03*", "ls -lrt PMDPN803*","ls -lrt PMDPN903*", "ls -lrt PMDPNT03*",
             "\nScan Processing Check","ls -lrt PPSPIN06*", "ls -lrt PPSPSP06*","ls -lrt PPSPLU03*",
-            "\nManifest load & Printing Check","ls -lrt PCMPMA03*", "ls -lrt PCMPMR03*",
+            "\nManifest load & Printing Check","ls -lrt PCMPMA03*",
             "\nNEXT Sacks Monitoring check","ls -lrt PPSPNX03*", "ls -lrt PPSPNF*"]
 
     jobLongNames = {
@@ -117,7 +117,6 @@ def main():
                     "PPSPSP06" : "PPSPSPE_SCANLOAD",
                     "PPSPLU03" : "PPSPLUE_UNDLVPCL",
                     "PCMPMA03" : "PCMPMAE_MFSTPRNT",
-                    "PCMPMR03" : "PCMPMRE_MFSTRPRT",
                     "PPSPNX03" : "PPSPNXE_NEXTTRNK",
                     "PPSPNF" : "PPSPNFE_NEXTSCAN"
                 }
